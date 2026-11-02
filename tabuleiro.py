@@ -52,8 +52,11 @@ class Tabuleiro:
                 quadrante.draw()
 
                 if quadrante.planta:
-                    quadrante.planta.plantaSetPosition(quadrante)
-                    quadrante.planta.draw()
+                    if quadrante.planta in self.plantasVivas:
+                        quadrante.planta.plantaSetPosition(quadrante)
+                        quadrante.planta.draw()
+                    else:
+                        quadrante.planta = None
 
             
     def invocaPoluicao(self, deltaTime):
@@ -73,7 +76,12 @@ class Tabuleiro:
     def movePoluicoes(self, deltaTime):
         if len(self.poluicoesVivas) > 0:
             for poluicao in self.poluicoesVivas:
-                poluicao.moverPoluicao(deltaTime)
+                if poluicao.deveAndar() == True:
+                    poluicao.moverPoluicao(deltaTime)
+
+    def ataquePoluicoes(self, deltaTime):
+        for poluicao in self.poluicoesVivas:
+            poluicao.atacar(self.plantasVivas, deltaTime)
 
     def drawPoluicoes(self):
         for poluicao in self.poluicoesVivas:
@@ -85,6 +93,11 @@ class Tabuleiro:
                 planta.atirar(self.alturaCasa, self.larguraCasa)
                 
             planta.moverTiros(deltaTime)
+
+    def tiroAcertou(self):
+        for planta in self.plantasVivas:
+            planta.acertouTiro(self.poluicoesVivas, self.plantasVivas)
+    
 
     def drawTiros(self):
         for planta in self.plantasVivas:

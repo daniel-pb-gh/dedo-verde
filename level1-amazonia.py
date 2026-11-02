@@ -17,6 +17,7 @@ mapaTemplate = [
 ]
 
 poluicoesTemplate = [
+    {"tempo": 0.0, "linha": 3, "tipo": "plastico"},
     {"tempo": 0.0, "linha": 0, "tipo": "plastico"},
     {"tempo": 8.5, "linha": 1, "tipo": "plastico"},
     {"tempo": 13.0, "linha": 3, "tipo": "plastico"},
@@ -43,6 +44,8 @@ while True:
     assentamento.invocaPoluicao(window.delta_time())
     assentamento.movePoluicoes(window.delta_time())
     assentamento.atiraPlantas(window.delta_time())
+    assentamento.tiroAcertou()
+    assentamento.ataquePoluicoes(window.delta_time())
     
 
     assentamento.draw()

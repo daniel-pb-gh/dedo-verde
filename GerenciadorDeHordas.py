@@ -1,5 +1,3 @@
-
-
 class GerenciadorHordas():
     def __init__(self, poluicoesTemplate: list[dict]):
         self.tempoPercorrido = 0
