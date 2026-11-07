@@ -1,7 +1,7 @@
 from __future__ import annotations
+from typing import TYPE_CHECKING
 from PPlay.sprite import Sprite
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING
 from HitBox import HitBox
 
 if TYPE_CHECKING:
@@ -14,6 +14,8 @@ class Planta(ABC, Sprite):
     linha: int
     coluna: int
     hitBox: GameObject
+    item: str
+    brotosNecessarios: int
 
     def __init__(self, caminho_imagem, total_frames=1):
         super().__init__(caminho_imagem, total_frames)
@@ -32,6 +34,8 @@ class Planta(ABC, Sprite):
             
 class Feijao(Planta):
     tipo = "terrestre"  
+    item = "resources/feijaoItem.png"
+    brotosNecessarios = 6
     
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteFeijao.png")
@@ -41,7 +45,7 @@ class Feijao(Planta):
         self.coluna = coluna
         self.tiros = []
         self.cooldownTime = 0
-        self.hitBox = HitBox(100, 100)
+        self.hitBox = HitBox(66, 100) # primeiro argumento largura, segundo altura.
 
     def plantaSetPosition(self, quadrante):
         posX = quadrante.x + (quadrante.width / 4)
@@ -80,6 +84,10 @@ class Feijao(Planta):
             tiro.x += 100 * deltaTime
 
 class VitoriaRegia(Planta):
+    tipo = "aquatico"  
+    item = "resources/vitoriaRegiaItem.png"
+    brotosNecessarios = 5
+    
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteVitoriaRegia.png")
         self.pontosDeVida = 50
@@ -121,5 +129,3 @@ class VitoriaRegia(Planta):
 
     def moverTiros(self, deltaTime) -> None:
         pass
-
-    tipo = "aquatico"  

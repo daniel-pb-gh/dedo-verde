@@ -29,7 +29,9 @@ poluicoesTemplate = [
     ]
 
 
-assentamento = Tabuleiro(window, mapaTemplate, poluicoesTemplate, 120, 120)
+plantasDaFase = [Feijao, VitoriaRegia]
+assentamento = Tabuleiro(window, mapaTemplate, poluicoesTemplate, plantasDaFase, 120, 120)
+
 feijao1 = Feijao(1, 1)
 feijao2 = Feijao(0, 2)
 vitoriaRegia1 = VitoriaRegia(2, 2)
@@ -51,5 +53,6 @@ while True:
     assentamento.draw()
     assentamento.drawPoluicoes()
     assentamento.drawTiros()
+    assentamento.bancadaDraw()
 
     window.update()

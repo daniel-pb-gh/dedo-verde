@@ -3,6 +3,7 @@ from Planta import Planta
 from Poluicao import *
 from PPlay.window import Window
 from GerenciadorDeHordas import GerenciadorHordas
+from bancada import *
 
 class Quadrante(Sprite):
     def __init__(self, caminho_imagem, posX: float, posY: float, tipoTerreno: str, total_frames=1):
@@ -13,7 +14,7 @@ class Quadrante(Sprite):
         self.planta = None
 
 class Tabuleiro:
-    def __init__(self, window: Window, mapaTemplate, poluicoesTemplate: list[dict],larguraCasa: int, alturaCasa: int):
+    def __init__(self, window: Window, mapaTemplate, poluicoesTemplate: list[dict],plantasDaFase, larguraCasa: int, alturaCasa: int):
         self.window = window
         self.linhas = len(mapaTemplate)
         self.colunas = len(mapaTemplate[0])
@@ -24,6 +25,7 @@ class Tabuleiro:
         self.tempoDecorrido = 0
         self.poluicoesVivas = []
         self.plantasVivas = []
+        self.bancada = Bancada("resources/bancada.jpg", plantasDaFase, 10, window.altura)
 
 
         for l in range(self.linhas):
@@ -42,9 +44,10 @@ class Tabuleiro:
                 linhaAtual.append(novaCasa)
             self.assentamento.append(linhaAtual)
 
-    
+
     def passaTempo(self, deltaTime):
         self.tempoDecorrido += deltaTime
+        self.bancada.cresceBrotos(deltaTime)
     
     def draw(self):
         for linha in self.assentamento:
@@ -57,7 +60,6 @@ class Tabuleiro:
                         quadrante.planta.draw()
                     else:
                         quadrante.planta = None
-
             
     def invocaPoluicao(self, deltaTime):
         poluicoesParaSpawn = self.gerenciadorDeHordas.processarSpawns(deltaTime)
@@ -98,11 +100,14 @@ class Tabuleiro:
         for planta in self.plantasVivas:
             planta.acertouTiro(self.poluicoesVivas, self.plantasVivas)
     
-
     def drawTiros(self):
         for planta in self.plantasVivas:
             for tiro in planta.tiros:
                 tiro.draw()
+
+    def bancadaDraw(self):
+        self.bancada.draw()
+        self.bancada.drawItems()
 
     def plantar(self, planta: Planta, linIndex: int, colIndex: int):
         if (planta.tipo == (self.assentamento[linIndex][colIndex]).tipoTerreno):
