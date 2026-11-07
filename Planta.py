@@ -40,7 +40,7 @@ class Feijao(Planta):
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteFeijao.png")
         self.pontosDeVida = 100
-        self.dano = 2
+        self.dano = 10
         self.linha = linha
         self.coluna = coluna
         self.tiros = []

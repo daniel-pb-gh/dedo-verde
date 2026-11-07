@@ -28,18 +28,8 @@ poluicoesTemplate = [
     {"tempo": 42.0, "linha": 0, "tipo": "plastico"}
     ]
 
-
 plantasDaFase = [Feijao, VitoriaRegia]
-assentamento = Tabuleiro(window, mapaTemplate, poluicoesTemplate, plantasDaFase, 120, 120)
-
-feijao1 = Feijao(1, 1)
-feijao2 = Feijao(0, 2)
-vitoriaRegia1 = VitoriaRegia(2, 2)
-vitoriaRegia2 = VitoriaRegia(3, 1)
-assentamento.plantar(feijao1, 1, 1)
-assentamento.plantar(feijao2, 0, 2)
-assentamento.plantar(vitoriaRegia1, 2, 2)
-assentamento.plantar(vitoriaRegia2, 3, 1)
+assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, 120, 120)
 
 while True:
     assentamento.passaTempo(window.delta_time())
@@ -48,11 +38,13 @@ while True:
     assentamento.atiraPlantas(window.delta_time())
     assentamento.tiroAcertou()
     assentamento.ataquePoluicoes(window.delta_time())
-    
+    assentamento.plantar()
 
     assentamento.draw()
     assentamento.drawPoluicoes()
     assentamento.drawTiros()
     assentamento.bancadaDraw()
+    assentamento.selecionaPlanta()
+    assentamento.drawPlantaSelecionada()
 
     window.update()
