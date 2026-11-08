@@ -19,13 +19,24 @@ class Bancada(Sprite):
         self.mouse = mouse
         self.classePlantas_sprites = {}
 
+        lastSprite = None
         for i in range(len(plantasDaFase)):
-            classePlanta = plantasDaFase[i]
-            sprite = Sprite(classePlanta.item)
-            spriteX = (self.x + 25) + (50 * i)
-            spriteY = (self.y + 7)
-            sprite.set_position(spriteX, spriteY)
-            self.classePlantas_sprites[classePlanta] = sprite
+            if lastSprite == None:
+                classePlanta = plantasDaFase[i]
+                sprite = Sprite(classePlanta.item)
+                spriteX = (self.x + 25)
+                spriteY = (self.y + 7)
+                sprite.set_position(spriteX, spriteY)
+                self.classePlantas_sprites[classePlanta] = sprite
+                lastSprite = sprite
+            else:
+                classePlanta = plantasDaFase[i]
+                sprite = Sprite(classePlanta.item)
+                spriteX = ((lastSprite.x + lastSprite.width) + 10)
+                spriteY = (self.y + 7)
+                sprite.set_position(spriteX, spriteY)
+                self.classePlantas_sprites[classePlanta] = sprite
+                lastSprite = sprite
 
     def cresceBrotos(self, deltaTime):
         if self.qtdBrotosAtuais < self.maxBrotos:

@@ -15,6 +15,7 @@ class Poluicao(ABC, Sprite):
         self.dano: int
         self.cooldownTime: int
         self.currentCooldown: float
+        self.pace: int
 
 
     @classmethod
@@ -23,6 +24,8 @@ class Poluicao(ABC, Sprite):
         match poluicao["tipo"]:
             case "plastico":
                 return Plastico(poluicao["linha"])
+            case "oleo":
+                return Oleo(poluicao["linha"])
             case error:
                 print("não tem essa poluicao")   
                 return None 
@@ -36,6 +39,8 @@ class Poluicao(ABC, Sprite):
         planta.pontosDeVida -= self.dano
 
     def atacar(self, plantasVivas: list[Planta], deltaTime):
+        self.estado = "andando"
+        
         if self.currentCooldown > 0:
             self.currentCooldown -= deltaTime
 
@@ -48,11 +53,9 @@ class Poluicao(ABC, Sprite):
                     if planta.pontosDeVida <= 0:
                         plantasVivas.remove(planta)
                 break
-            else:
-                self.estado = "andando"
 
     def moverPoluicao(self, deltaTime):
-        self.x -= 50 * deltaTime
+        self.x -= self.pace * deltaTime
 
 
 class Plastico(Poluicao):
@@ -63,3 +66,14 @@ class Plastico(Poluicao):
         self.dano = 75
         self.cooldownTime = 2
         self.currentCooldown = 0
+        self.pace = 50
+
+class Oleo(Poluicao):
+    def __init__(self, linha: int):
+        super().__init__("resources/spriteOleo.png")
+        self.pontosDeVida = 30
+        self.linha = linha
+        self.dano = 90
+        self.cooldownTime = 3
+        self.currentCooldown = 0
+        self.pace = 30
