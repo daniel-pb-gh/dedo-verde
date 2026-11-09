@@ -51,6 +51,16 @@ class Tabuleiro:
                 linhaAtual.append(novaCasa)
             self.assentamento.append(linhaAtual)
 
+    def gameOver(self):
+        for poluicao in self.poluicoesVivas:
+            if (poluicao.x + poluicao.width) <= 0:
+                return True
+        return False
+
+    def youWin(self):
+        if (len(self.gerenciadorDeHordas.filaSpawnPoluicoes) == 0) and (len(self.poluicoesVivas) == 0):
+            return True
+        return False
 
     def passaTempo(self, deltaTime):
         self.tempoDecorrido += deltaTime
@@ -60,6 +70,32 @@ class Tabuleiro:
             self.plantaSelecionada = novaSelecao
             self.previewSprite = Sprite(novaSelecao.item)
 
+
+    def plantar(self):
+        line, col = self.selectQuadrante()
+        if line != -1 and col != -1:
+            self.plantarNoQuadrante(line, col)
+
+    def selectQuadrante(self):
+        if self.mouse.button_down(1):
+            if self.plantaSelecionada != None:
+                for i in range(len(self.assentamento)):
+                    for j in range(len(self.assentamento[i])):
+                        if self.mouse.is_over_object(self.assentamento[i][j]):
+                            return i, j
+        return -1, -1
+
+    def plantarNoQuadrante(self, linIndex: int, colIndex: int):
+        if self.plantaSelecionada != None:
+            if self.plantaSelecionada.brotosNecessarios <= self.bancada.qtdBrotosAtuais:
+                if self.assentamento[linIndex][colIndex].planta == None:
+                    if (self.plantaSelecionada.tipo == (self.assentamento[linIndex][colIndex]).tipoTerreno):
+                        novaPlanta = self.plantaSelecionada(linIndex, colIndex)
+                        (self.assentamento[linIndex][colIndex]).planta = novaPlanta
+                        self.plantasVivas.append(novaPlanta)
+                        self.bancada.qtdBrotosAtuais -= self.plantaSelecionada.brotosNecessarios
+                        self.plantaSelecionada = None
+                        self.previewSprite = None
 
     def selecionaPlanta(self):
         if self.previewSprite == None:
@@ -133,34 +169,3 @@ class Tabuleiro:
             pass
         else:
             self.previewSprite.draw()
-
-    def plantar(self):
-        line, col = self.selectQuadrante()
-        if line != -1 and col != -1:
-            self.plantarNoQuadrante(line, col)
-
-    def selectQuadrante(self):
-        if self.mouse.button_down(1):
-            if self.plantaSelecionada != None:
-                for i in range(len(self.assentamento)):
-                    for j in range(len(self.assentamento[i])):
-                        if self.mouse.is_over_object(self.assentamento[i][j]):
-                            return i, j
-        return -1, -1
-
-    def plantarNoQuadrante(self, linIndex: int, colIndex: int):
-        if self.plantaSelecionada != None:
-            if self.plantaSelecionada.brotosNecessarios <= self.bancada.qtdBrotosAtuais:
-                if self.assentamento[linIndex][colIndex].planta == None:
-                    if (self.plantaSelecionada.tipo == (self.assentamento[linIndex][colIndex]).tipoTerreno):
-                        novaPlanta = self.plantaSelecionada(linIndex, colIndex)
-                        (self.assentamento[linIndex][colIndex]).planta = novaPlanta
-                        self.plantasVivas.append(novaPlanta)
-                        self.bancada.qtdBrotosAtuais -= self.plantaSelecionada.brotosNecessarios
-                        self.plantaSelecionada = None
-                        self.previewSprite = None
-
-    def plantarFake(self, planta: Planta, linIndex: int, colIndex: int):
-        if (planta.tipo == (self.assentamento[linIndex][colIndex]).tipoTerreno):
-            (self.assentamento[linIndex][colIndex]).planta = planta
-            self.plantasVivas.append(planta)
