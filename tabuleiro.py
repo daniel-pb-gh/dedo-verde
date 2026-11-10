@@ -130,19 +130,28 @@ class Tabuleiro:
             novaPoluicao.set_position(self.window.largura, yPoluicao)
             self.poluicoesVivas.append(novaPoluicao)
 
-    def movePoluicoes(self, deltaTime):
-        if len(self.poluicoesVivas) > 0:
-            for poluicao in self.poluicoesVivas:
-                if poluicao.deveAndar() == True:
-                    poluicao.moverPoluicao(deltaTime)
+    def progridePoluicoes(self, deltaTime): #junta oq umas 3 funções fazem em 1
+        if len(self.poluicoesVivas) > 0:    
+            for p in self.poluicoesVivas:
+                p.atacar(self.plantasVivas, deltaTime)       # decide o estado ("andando"/"atacando")
+                if p.deveAndar():
+                    p.moverPoluicao(deltaTime)
+                p.atualizarAnimacao()            # converte estado -> animação
+                p.draw()
 
-    def ataquePoluicoes(self, deltaTime):
-        for poluicao in self.poluicoesVivas:
-            poluicao.atacar(self.plantasVivas, deltaTime)
+    #def movePoluicoes(self, deltaTime):
+    #    if len(self.poluicoesVivas) > 0:
+    #        for poluicao in self.poluicoesVivas:
+    #            if poluicao.deveAndar() == True:
+    #                poluicao.moverPoluicao(deltaTime)
 
-    def drawPoluicoes(self):
-        for poluicao in self.poluicoesVivas:
-            poluicao.draw()
+    #def ataquePoluicoes(self, deltaTime):
+    #    for poluicao in self.poluicoesVivas:
+    #        poluicao.atacar(self.plantasVivas, deltaTime)
+
+    #def drawPoluicoes(self):
+    #    for poluicao in self.poluicoesVivas:
+    #        poluicao.draw()
 
     def atiraPlantas(self, deltaTime):
         for planta in self.plantasVivas:

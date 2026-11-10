@@ -35,14 +35,16 @@ def level1amazonia():
     while True:
         assentamento.passaTempo(window.delta_time())
         assentamento.invocaPoluicao(window.delta_time())
-        assentamento.movePoluicoes(window.delta_time())
+        #assentamento.movePoluicoes(window.delta_time())
         assentamento.atiraPlantas(window.delta_time())
         assentamento.tiroAcertou()
-        assentamento.ataquePoluicoes(window.delta_time())
+        #assentamento.ataquePoluicoes(window.delta_time())
         assentamento.plantar()
 
+        assentamento.progridePoluicoes(window.delta_time()) ##Função Nova
+
         assentamento.draw()
-        assentamento.drawPoluicoes()
+        #assentamento.drawPoluicoes()
         assentamento.drawTiros()
         assentamento.bancadaDraw()
         assentamento.selecionaPlanta()

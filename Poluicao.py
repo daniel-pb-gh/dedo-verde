@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from Planta import Planta
 
 class Poluicao(ABC, Sprite):
-    def __init__(self, caminho_imagem, total_frames=1):
+    def __init__(self, caminho_imagem, total_frames=1, animacoes=None):
         super().__init__(caminho_imagem, total_frames)
         self.linha = None
         self.pontosDeVida: float
@@ -16,6 +16,11 @@ class Poluicao(ABC, Sprite):
         self.cooldownTime: int
         self.currentCooldown: float
         self.pace: int
+
+        # estado -> (frame_inicial, frame_final, segundos_por_frame) ## "estado" é a chave do dicionario
+        self.animacoes = animacoes or {"andando": (0, total_frames - 1, 0.1)}
+        # cada objeto é 1 spritesheet cheio de animações, então só tocam as partes certas dependendo da animação
+        self._estadoAnimado = None   # último estado que configurou a animação
 
 
     @classmethod
@@ -57,10 +62,29 @@ class Poluicao(ABC, Sprite):
     def moverPoluicao(self, deltaTime):
         self.x -= self.pace * deltaTime
 
+    def atualizarAnimacao(self): ## TEM QUE SER CHAMADA DEPOIS DE ATACAR
+        if self.estado != self._estadoAnimado:
+            self._estadoAnimado = self.estado
+            inicio, fim, tempo = self.animacoes.get(
+                self.estado, self.animacoes["andando"])
+            self.set_intervalo_frames(inicio, fim)  # trecho da folha
+            self.set_curr_frame(inicio)             # recomeça do início
+            self.tempo_por_frame = tempo            # velocidade deste estado
+            self.tempo_acumulado = 0
+            self.rodando = True
+        self.update()  # avança os quadros (Animation.update)
+
 
 class Plastico(Poluicao):
     def __init__(self, linha: int):
-        super().__init__("resources/spritePlastico.png")
+        super().__init__(
+            "resources/spritePlastico.png",
+            total_frames=999,
+            animacoes={
+                "andando": (0, 3, 0.15),
+                "atacando": (4, 6, 0.10),
+            },           
+        )
         self.pontosDeVida = 40
         self.linha = linha
         self.dano = 75
@@ -70,7 +94,14 @@ class Plastico(Poluicao):
 
 class Oleo(Poluicao):
     def __init__(self, linha: int):
-        super().__init__("resources/spriteOleo.png")
+        super().__init__(
+            "resources/spriteOleo.png",
+            total_frames=8,
+            animacoes={
+                "andando":  (0, 3, 0.20),
+                "atacando": (4, 6, 0.15),
+            },
+        )
         self.pontosDeVida = 30
         self.linha = linha
         self.dano = 90
