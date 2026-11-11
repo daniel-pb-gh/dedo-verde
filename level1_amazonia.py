@@ -41,13 +41,14 @@ def level1amazonia():
         #assentamento.ataquePoluicoes(window.delta_time())
         assentamento.plantar()
 
-        assentamento.progridePoluicoes(window.delta_time()) ##Função Nova
-
+        assentamento.selecionaPlanta()
         assentamento.draw()
+        assentamento.progridePoluicoes(window.delta_time()) ##Função Nova
+        
         #assentamento.drawPoluicoes()
         assentamento.drawTiros()
         assentamento.bancadaDraw()
-        assentamento.selecionaPlanta()
+        
         assentamento.drawPlantaSelecionada()
         if assentamento.gameOver():
             return 0

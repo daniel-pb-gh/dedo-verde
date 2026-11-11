@@ -140,7 +140,7 @@ class VitoriaRegia(Planta):
         self.coluna = coluna
         self.tiros = []
         self.dano = float("inf")
-        self.hitbox = None
+        self.hitBox = HitBox(10, 10)
 
     def plantaSetPosition(self, quadrante):
         posX = quadrante.x
