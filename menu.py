@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 from PPlay.window import Window
 from PPlay.keyboard import Keyboard
 from PPlay.mouse import Mouse
+from PPlay.sound import Music
 from botoes import *
 from arquivo import *
 from level1_amazonia import youWin, gameOver
@@ -11,6 +12,10 @@ window = Window(800, 600, "menu")
 
 #janela
 window.set_background_color((103, 199, 100))
+
+#musica
+musicaMenu = Music("resources/Music/Ambient 9.ogg")
+musicaMenu.play()
 
 start, mapa, info = inicializaBotoes(window)
 
@@ -74,6 +79,7 @@ while True:
         window.update()
 
     elif gameState == "game":
+        musicaMenu.pause()
         venceu = niveis[nivelSelecionado]()
 
         if venceu == 1:
@@ -83,5 +89,5 @@ while True:
             gameOver()
 
         gameState = "mapa"
-
+        musicaMenu.play()
         window.update()

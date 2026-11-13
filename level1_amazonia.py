@@ -1,5 +1,6 @@
 from PPlay.window import Window
 from PPlay.mouse import Mouse
+from PPlay.sound import Music
 from tabuleiro import Tabuleiro
 from Planta import *
 
@@ -9,6 +10,9 @@ def level1amazonia():
     window.set_background_color((88,155,86))
 
     mouse = Mouse()
+
+    musicaDaFase = Music("resources/Music/Ambient 8.ogg")
+    musicaDaFase.play()
 
     mapaTemplate = [
         ['T', 'T', 'T', 'T', 'T', 'T'],
@@ -51,8 +55,10 @@ def level1amazonia():
         
         assentamento.drawPlantaSelecionada()
         if assentamento.gameOver():
+            musicaDaFase.stop()
             return 0
         if assentamento.youWin():
+            musicaDaFase.stop()
             return 1
 
         window.update()
