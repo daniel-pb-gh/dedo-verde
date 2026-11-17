@@ -1,7 +1,9 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+from PPlay.window import Window
 from PPlay.sprite import Sprite
-from level1_amazonia import level1amazonia
+from level1Pantanal import level1Pantanal
+from level2_amazonia import level2amazonia
 
 if TYPE_CHECKING:
     from PPlay.window import Window
@@ -56,9 +58,35 @@ def inicializaBotoes(window: Window):
 
 def inicializaNiveis():
     niveis = []
-    niveis.append(level1amazonia)
-    niveis.append(level1amazonia)
-    niveis.append(level1amazonia)
-    niveis.append(level1amazonia)
+    niveis.append(level1Pantanal)
+    niveis.append(level2amazonia)
+    niveis.append(level2amazonia)
+    niveis.append(level2amazonia)
 
     return niveis
+
+def youWin():
+    window = Window(800, 600, "you Win")
+    screen = Sprite("resources/results/youWin.jpg")
+    timer = 2
+    currentTime = 0
+
+    while True:
+        screen.draw()
+        if currentTime >= timer:
+            return
+        currentTime += window.delta_time()
+        window.update()
+
+def gameOver():
+    window = Window(800, 600, "you Win")
+    screen = Sprite("resources/results/gameOver.jpg")
+    timer = 2
+    currentTime = 0
+
+    while True:
+        screen.draw()
+        if currentTime >= timer:
+            return
+        currentTime += window.delta_time()
+        window.update()

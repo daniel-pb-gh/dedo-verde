@@ -95,7 +95,7 @@ class Feijao(Planta):
 class Guarana(Planta):
     tipo = "terrestre"  
     item = "resources/guaranaItem.png"
-    brotosNecessarios = 6
+    brotosNecessarios = 4
     
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteGuarana.png")
@@ -135,7 +135,7 @@ class VitoriaRegia(Planta):
     
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteVitoriaRegia.png")
-        self.pontosDeVida = 50
+        self.pontosDeVida = 110
         self.linha = linha
         self.coluna = coluna
         self.tiros = []

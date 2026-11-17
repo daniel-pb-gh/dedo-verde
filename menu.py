@@ -6,7 +6,6 @@ from PPlay.mouse import Mouse
 from PPlay.sound import Music
 from botoes import *
 from arquivo import *
-from level1_amazonia import youWin, gameOver
 
 window = Window(800, 600, "menu")
 

@@ -4,7 +4,7 @@ from PPlay.sound import Music
 from tabuleiro import Tabuleiro
 from Planta import *
 
-def level1amazonia():
+def level1Pantanal():
 
     window = Window(800, 600, "level1-amazônia")
     window.set_background_color((88,155,86))
@@ -22,18 +22,18 @@ def level1amazonia():
     ]
 
     poluicoesTemplate = [
-        {"tempo": 0.0, "linha": 3, "tipo": "plastico"},
+        {"tempo": 0.0, "linha": 3, "tipo": "oleo"},
         {"tempo": 0.0, "linha": 0, "tipo": "oleo"},
-        {"tempo": 8.5, "linha": 1, "tipo": "plastico"},
-        {"tempo": 13.0, "linha": 3, "tipo": "plastico"},
-        {"tempo": 19.0, "linha": 2, "tipo": "plastico"},
-        {"tempo": 22.0, "linha": 0, "tipo": "plastico"},
-        {"tempo": 29.0, "linha": 0, "tipo": "plastico"},
-        {"tempo": 36.0, "linha": 0, "tipo": "plastico"},
-        {"tempo": 42.0, "linha": 0, "tipo": "plastico"}
+        {"tempo": 8.5, "linha": 1, "tipo": "oleo"},
+        {"tempo": 13.0, "linha": 3, "tipo": "oleo"},
+        {"tempo": 19.0, "linha": 2, "tipo": "oleo"},
+        {"tempo": 22.0, "linha": 0, "tipo": "oleo"},
+        {"tempo": 29.0, "linha": 0, "tipo": "oleo"},
+        {"tempo": 36.0, "linha": 0, "tipo": "oleo"},
+        {"tempo": 42.0, "linha": 0, "tipo": "oleo"}
         ]
 
-    plantasDaFase = [Feijao, VitoriaRegia, Guarana]
+    plantasDaFase = [VitoriaRegia, Guarana]
     assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, 120, 120)
 
     while True:
@@ -61,30 +61,7 @@ def level1amazonia():
             musicaDaFase.stop()
             return 1
 
-        window.update()
+        if window.delta_time() > 0:
+            print(1/window.delta_time())
 
-def youWin():
-    window = Window(800, 600, "you Win")
-    screen = Sprite("resources/results/youWin.jpg")
-    timer = 2
-    currentTime = 0
-
-    while True:
-        screen.draw()
-        if currentTime >= timer:
-            return
-        currentTime += window.delta_time()
-        window.update()
-
-def gameOver():
-    window = Window(800, 600, "you Win")
-    screen = Sprite("resources/results/gameOver.jpg")
-    timer = 2
-    currentTime = 0
-
-    while True:
-        screen.draw()
-        if currentTime >= timer:
-            return
-        currentTime += window.delta_time()
         window.update()
