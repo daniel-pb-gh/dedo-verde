@@ -34,7 +34,7 @@ def level1Pantanal():
         ]
 
     plantasDaFase = [VitoriaRegia, Guarana]
-    assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, 120, 120)
+    assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, "resources/spriteQTerrestre.png",120, 120)
 
     while True:
         assentamento.passaTempo(window.delta_time())
@@ -61,7 +61,5 @@ def level1Pantanal():
             musicaDaFase.stop()
             return 1
 
-        if window.delta_time() > 0:
-            print(1/window.delta_time())
 
         window.update()

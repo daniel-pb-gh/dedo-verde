@@ -59,7 +59,7 @@ class Planta(ABC, Sprite):
 class Feijao(Planta):
     tipo = "terrestre"  
     item = "resources/feijaoItem.png"
-    brotosNecessarios = 6
+    brotosNecessarios = 5
     
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteFeijao.png")

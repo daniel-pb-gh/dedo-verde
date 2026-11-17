@@ -4,6 +4,9 @@ from PPlay.window import Window
 from PPlay.sprite import Sprite
 from level1Pantanal import level1Pantanal
 from level2_amazonia import level2amazonia
+from level3Pampa import level3Pampa
+from level4Caatinga import level4Caatinga
+
 
 if TYPE_CHECKING:
     from PPlay.window import Window
@@ -60,8 +63,8 @@ def inicializaNiveis():
     niveis = []
     niveis.append(level1Pantanal)
     niveis.append(level2amazonia)
-    niveis.append(level2amazonia)
-    niveis.append(level2amazonia)
+    niveis.append(level3Pampa)
+    niveis.append(level4Caatinga)
 
     return niveis
 

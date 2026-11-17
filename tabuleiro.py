@@ -18,7 +18,7 @@ class Quadrante(Sprite):
         self.planta = None
 
 class Tabuleiro:
-    def __init__(self, window: Window, mouse: Mouse, mapaTemplate, poluicoesTemplate: list[dict],plantasDaFase, larguraCasa: int, alturaCasa: int):
+    def __init__(self, window: Window, mouse: Mouse, mapaTemplate, poluicoesTemplate: list[dict],plantasDaFase, caminhoTerrestre: str, larguraCasa: int, alturaCasa: int):
         self.window = window
         self.mouse = mouse
         self.linhas = len(mapaTemplate)
@@ -46,7 +46,7 @@ class Tabuleiro:
                 if tipoCasa == 'A':
                     novaCasa = Quadrante("resources/spriteQAquatico.png", x, y, tipoTerreno="aquatico")
                 else:
-                    novaCasa = Quadrante("resources/spriteQTerrestre.png", x, y, tipoTerreno="terrestre")
+                    novaCasa = Quadrante(caminhoTerrestre, x, y, tipoTerreno="terrestre")
                     
                 linhaAtual.append(novaCasa)
             self.assentamento.append(linhaAtual)

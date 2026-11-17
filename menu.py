@@ -67,11 +67,12 @@ while True:
             fase.draw()
         if mouse.button_down(1):
             for i in range(niveisVencidos + 1):
-                if ((mouse.is_over_object(fases[i]))):
-                        gameState = "game"
-                        nivelSelecionado = i
-                        window.update()
-        
+                if i < len(fases):
+                    if ((mouse.is_over_object(fases[i]))):
+                            gameState = "game"
+                            nivelSelecionado = i
+                            window.update()
+            
         window.update()
 
     elif gameState == "info":

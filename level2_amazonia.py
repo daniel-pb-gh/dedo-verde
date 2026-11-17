@@ -32,7 +32,7 @@ def level2amazonia():
         {"tempo": 20.0, "linha": 0, "tipo": "oleo"},
         {"tempo": 23.0, "linha": 3, "tipo": "plastico"},
         {"tempo": 24.0, "linha": 1, "tipo": "plastico"},
-        {"tempo": 26.0, "linha": 1, "tipo": "oleo"},
+        {"tempo": 26.0, "linha": 0, "tipo": "oleo"},
         {"tempo": 29.0, "linha": 2, "tipo": "plastico"},
         {"tempo": 32.0, "linha": 0, "tipo": "oleo"},
         {"tempo": 33.0, "linha": 3, "tipo": "oleo"},
@@ -50,7 +50,7 @@ def level2amazonia():
         ]
 
     plantasDaFase = [Feijao, VitoriaRegia, Guarana]
-    assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, 120, 120)
+    assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, "resources/spriteQTerrestre.png", 120, 120)
 
     while True:
         assentamento.passaTempo(window.delta_time())
