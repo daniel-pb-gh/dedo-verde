@@ -55,7 +55,7 @@ def level4Caatinga():
         {"tempo": 124.0, "linha": 1, "tipo": "plastico"}
     ]
 
-    plantasDaFase = [Feijao, VitoriaRegia, Guarana]
+    plantasDaFase = [Feijao, Seringueira, VitoriaRegia, Guarana]
     assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, "resources/quadranteCaatinga.png", 120, 120)
 
     while True:

@@ -49,7 +49,7 @@ def level2amazonia():
         {"tempo": 61.0, "linha": 2, "tipo": "plastico"},
         ]
 
-    plantasDaFase = [Feijao, VitoriaRegia, Guarana]
+    plantasDaFase = [Seringueira, VitoriaRegia, Guarana]
     assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, "resources/spriteQTerrestre.png", 120, 120)
 
     while True:

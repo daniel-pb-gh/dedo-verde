@@ -6,7 +6,7 @@ from Planta import *
 
 def level3Pampa():
 
-    window = Window(800, 600, "level1-amazônia")
+    window = Window(800, 600, "level3-Pampa")
     window.set_background_color((196,206,102))
 
     mouse = Mouse()
@@ -49,7 +49,7 @@ def level3Pampa():
         {"tempo": 61.0, "linha": 2, "tipo": "plastico"},
         ]
 
-    plantasDaFase = [Feijao, VitoriaRegia, Guarana]
+    plantasDaFase = [Feijao, Seringueira, VitoriaRegia, Guarana]
     assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, "resources/quadrantePampas.png", 120, 120)
 
     while True:

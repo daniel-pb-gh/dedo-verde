@@ -42,7 +42,7 @@ class Bancada(Sprite):
         if self.qtdBrotosAtuais < self.maxBrotos:
             if self.timerBrotos <= 0:
                 self.qtdBrotosAtuais += 1
-                self.timerBrotos = 0.5
+                self.timerBrotos = 0.8
             else:
                 self.timerBrotos -= deltaTime
 

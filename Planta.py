@@ -59,7 +59,7 @@ class Planta(ABC, Sprite):
 class Feijao(Planta):
     tipo = "terrestre"  
     item = "resources/feijaoItem.png"
-    brotosNecessarios = 5
+    brotosNecessarios = 4
     
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteFeijao.png")
@@ -95,7 +95,7 @@ class Feijao(Planta):
 class Guarana(Planta):
     tipo = "terrestre"  
     item = "resources/guaranaItem.png"
-    brotosNecessarios = 4
+    brotosNecessarios = 3
     
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteGuarana.png")
@@ -127,11 +127,46 @@ class Guarana(Planta):
         for tiro in self.tiros:
             tiro.x += 100 * deltaTime
 
+class Seringueira(Planta):
+    tipo = "terrestre"  
+    item = "resources/seringueiraItem.png"
+    brotosNecessarios = 6
+    
+    def __init__(self, linha: int, coluna: int):
+        super().__init__("resources/spriteSeringueira.png")
+        self.pontosDeVida = 250
+        self.dano = 17
+        self.linha = linha
+        self.coluna = coluna
+        self.tiros = []
+        self.cooldownTime = 5
+        self.currentCooldown = 0
+        self.hitBox = HitBox(60, 80) # primeiro argumento largura, segundo altura.
+
+    def plantaSetPosition(self, quadrante):
+        posX = quadrante.x + 13
+        posY = quadrante.y - (2 * quadrante.height / 7) + 6
+        self.set_position(posX, posY)
+
+        self.hitBox.x = posX
+        self.hitBox.y = quadrante.y
+
+    def atirar(self, larguraCasa: int, alturaCasa: int) -> None:
+        tiroSeringueira = Sprite("resources/tiroSeringueira.png")
+        self.tiros.append(tiroSeringueira)
+        xTiro = self.x + (self.width/2)
+        yTiro = (self.linha * alturaCasa) + (4 * alturaCasa/6)
+        tiroSeringueira.set_position(xTiro, yTiro)
+
+    def moverTiros(self, deltaTime):
+        for tiro in self.tiros:
+            tiro.x += 67 * deltaTime
+
 
 class VitoriaRegia(Planta):
     tipo = "aquatico"  
     item = "resources/vitoriaRegiaItem.png"
-    brotosNecessarios = 5
+    brotosNecessarios = 4
     
     def __init__(self, linha: int, coluna: int):
         super().__init__("resources/spriteVitoriaRegia.png")
