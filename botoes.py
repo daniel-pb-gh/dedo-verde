@@ -47,9 +47,10 @@ def inicializaFases(window: Window):
     return fases
 
 def inicializaBotoes(window: Window):
+    banner = Sprite("resources/mapas/banner.jpeg")
     start = Sprite("resources/botoes/start.png")
-    start.x = window.largura/2 - start.width/2
-    start.y = window.altura/2 - start.height/2
+    start.x = (window.largura/2 - start.width/2) - 6.5
+    start.y = (3 * window.altura/5) - start.height/2
     mapa = Sprite("resources/botoes/mapa.png")
     mapa.x = window.largura/2 - mapa.width/2
     mapa.y = (2 * window.altura/7) - mapa.height/2
@@ -57,7 +58,7 @@ def inicializaBotoes(window: Window):
     info.x = window.largura/2 - info.width/2
     info.y = (5 * window.altura/7) - info.height/2
 
-    return start, mapa, info
+    return start, mapa, info, banner
 
 def inicializaNiveis():
     niveis = []

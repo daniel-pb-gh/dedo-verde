@@ -6,8 +6,8 @@ from Planta import *
 
 def level2amazonia():
 
-    window = Window(800, 600, "level1-amazônia")
-    window.set_background_color((88,155,86))
+    window = Window(800, 600, "level2-amazônia")
+    window.set_background_color((66,155,52))
 
     mouse = Mouse()
 
@@ -50,7 +50,7 @@ def level2amazonia():
         ]
 
     plantasDaFase = [Seringueira, VitoriaRegia, Guarana]
-    assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, "resources/spriteQTerrestre.png", 120, 120)
+    assentamento = Tabuleiro(window, mouse, mapaTemplate, poluicoesTemplate, plantasDaFase, "resources/quadranteAmazonia.png", 120, 120)
 
     while True:
         assentamento.passaTempo(window.delta_time())

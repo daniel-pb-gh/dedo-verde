@@ -16,7 +16,7 @@ window.set_background_color((103, 199, 100))
 musicaMenu = Music("resources/Music/Ambient 9.ogg")
 musicaMenu.play()
 
-start, mapa, info = inicializaBotoes(window)
+start, mapa, info, banner = inicializaBotoes(window)
 
 mapas = inicializaMapa()
 numeroMapaAtual = 0
@@ -38,11 +38,12 @@ mouse = Mouse()
 while True:
 
     if gameState == "start": 
+        banner.draw()
         start.draw()
         window.update()
         if mouse.button_down(1):
             if ((mouse.is_over_object(start))):
-                gameState = "menu"
+                gameState = "mapa"
                 window.update()
 
     elif gameState == "menu":
