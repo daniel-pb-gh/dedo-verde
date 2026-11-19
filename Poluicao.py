@@ -16,6 +16,7 @@ class Poluicao(ABC, Sprite):
         self.cooldownTime: int
         self.currentCooldown: float
         self.pace: int
+        self.set_espelhado(True)
 
         # estado -> (frame_inicial, frame_final, segundos_por_frame) ## "estado" é a chave do dicionario
         self.animacoes = animacoes or {"andando": (0, total_frames - 1, 0.1)}
@@ -78,11 +79,11 @@ class Poluicao(ABC, Sprite):
 class Plastico(Poluicao):
     def __init__(self, linha: int):
         super().__init__(
-            "resources/spritePlastico.png",
-            total_frames=1,
+            "resources/spritePlastico2.png",
+            total_frames=10,
             animacoes={
-                #"andando": (0, 3, 0.15),
-                #"atacando": (4, 6, 0.10),
+                "andando": (0, 3, 0.6),
+                "atacando": (4, 9, 0.15),
             },           
         )
         self.pontosDeVida = 40
