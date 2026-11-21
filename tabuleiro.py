@@ -126,7 +126,7 @@ class Tabuleiro:
                 return None
             
             linhaPoluicao = poluicao["linha"]
-            yPoluicao = linhaPoluicao * self.alturaCasa - (self.alturaCasa/6)
+            yPoluicao = 28 + (linhaPoluicao * self.alturaCasa - (self.alturaCasa/6))
             novaPoluicao.set_position(self.window.largura, yPoluicao)
             self.poluicoesVivas.append(novaPoluicao)
 

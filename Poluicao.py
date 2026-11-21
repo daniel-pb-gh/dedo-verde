@@ -80,10 +80,10 @@ class Plastico(Poluicao):
     def __init__(self, linha: int):
         super().__init__(
             "resources/spritePlastico2.png",
-            total_frames=10,
+            total_frames=9,
             animacoes={
-                "andando": (0, 3, 0.6),
-                "atacando": (4, 9, 0.15),
+                "andando": (0, 2, 0.2),
+                "atacando": (3, 8, 0.15),
             },           
         )
         self.pontosDeVida = 40
@@ -96,11 +96,11 @@ class Plastico(Poluicao):
 class Oleo(Poluicao):
     def __init__(self, linha: int):
         super().__init__(
-            "resources/spriteOleo.png",
-            total_frames=1,
+            "resources/spriteOleo2mini.png",
+            total_frames=9,
             animacoes={
-                #"andando":  (0, 3, 0.20),
-                #"atacando": (4, 6, 0.15),
+                "andando":  (0, 2, 0.20),
+                "atacando": (3, 8, 0.15),
             },
         )
         self.pontosDeVida = 30

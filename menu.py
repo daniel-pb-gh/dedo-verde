@@ -7,7 +7,7 @@ from PPlay.sound import Music
 from botoes import *
 from arquivo import *
 
-window = Window(800, 600, "menu")
+window = Window(720, 600, "menu")
 
 #janela
 window.set_background_color((103, 199, 100))
